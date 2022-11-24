@@ -2,8 +2,7 @@
 
 namespace VisitService.Application.Repositories.Visits.Queries.Destination;
 
-public interface IGetCampusesQuery
+public interface IGetBuildingsQuery
 {
-    Task<List<Campus>> GetCampusesAsync();
-
+    Task<List<Building>> GetBuildingsAsync();
 }

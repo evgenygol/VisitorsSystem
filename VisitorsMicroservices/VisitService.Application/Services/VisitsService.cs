@@ -24,5 +24,7 @@ public class VisitsService : IVisitsService
     public async Task<List<VisitPurpose>> GetVisitPurposesAsync() => await _visitsRepository.GetVisitPurposesAsync();
 
     public async Task<List<Campus>> GetCampusesAsync() => await _visitsRepository.GetCampusesAsync();
+    public async Task<List<Building>> GetBuildingsAsync() => await _visitsRepository.GetBuildingsAsync();
+    public async Task<List<Floor>> GetFloorsAsync() => await _visitsRepository.GetFloorsAsync();
 
 }

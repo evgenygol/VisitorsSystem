@@ -36,6 +36,8 @@ public static class ServicesCollectionExtension
         services.AddScoped<IGetVisitTypesQuery, GetVisitTypesQuery>();
         services.AddScoped<IGetVisitPurposesQuery, GetVisitPurposesQuery>();
         services.AddScoped<IGetCampusesQuery, GetCampusesQuery>();
+        services.AddScoped<IGetBuildingsQuery, GetBuildingsQuery>();
+        services.AddScoped<IGetFloorsQuery, GetFloorsQuery>();
 
     }
 }

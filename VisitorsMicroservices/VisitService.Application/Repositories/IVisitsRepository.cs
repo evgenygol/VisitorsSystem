@@ -12,5 +12,6 @@ public interface IVisitsRepository
     Task<List<VisitType>> GetVisitTypesAsync();
     Task<List<VisitPurpose>> GetVisitPurposesAsync();
     Task<List<Campus>> GetCampusesAsync();
-
+    Task<List<Building>> GetBuildingsAsync();
+    Task<List<Floor>> GetFloorsAsync();
 }

@@ -10,5 +10,7 @@ public interface IApplicationDBContext
     DbSet<VisitType> VISIT_TYPES { get; set; }
     DbSet<VisitPurpose> VISIT_PURPOSES { get; set; }
     DbSet<Campus> CAMPUSES { get; set; }
+    DbSet<Building> BUILDINGS { get; set; }
+    DbSet<Floor> FLOORS { get; set; }
 
 }

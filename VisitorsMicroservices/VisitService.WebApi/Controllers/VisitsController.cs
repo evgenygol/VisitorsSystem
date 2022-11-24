@@ -41,4 +41,6 @@ public class VisitsController : ControllerBase
     public async Task<List<VisitPurpose>> GetVisitPurposes() => await _visitsService.GetVisitPurposesAsync();
     [HttpGet("GetCampuses")]
     public async Task<List<Campus>> GetCampuses() => await _visitsService.GetCampusesAsync();
+    public async Task<List<Building>> GetBuildings() => await _visitsService.GetBuildingsAsync();
+    public async Task<List<Floor>> GetFloors() => await _visitsService.GetFloorsAsync();
 }
