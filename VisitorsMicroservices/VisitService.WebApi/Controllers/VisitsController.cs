@@ -33,14 +33,18 @@ public class VisitsController : ControllerBase
     [HttpGet]
     public async Task<List<VisitGeneralInfo>> GetVisitsByDates([FromRoute] long startDateInMls, [FromRoute] long endDateInMls) => await _visitsService.GetVisitsAsync();
 
-
     [HttpGet("GetVisitTypes")]
     public async Task<List<VisitType>> GetVisitTypes() => await _visitsService.GetVisitTypesAsync();
 
     [HttpGet("GetVisitPurposes")]
     public async Task<List<VisitPurpose>> GetVisitPurposes() => await _visitsService.GetVisitPurposesAsync();
+
     [HttpGet("GetCampuses")]
     public async Task<List<Campus>> GetCampuses() => await _visitsService.GetCampusesAsync();
+
+    [HttpGet("GetBuildings")]
     public async Task<List<Building>> GetBuildings() => await _visitsService.GetBuildingsAsync();
+
+    [HttpGet("GetFloors")]
     public async Task<List<Floor>> GetFloors() => await _visitsService.GetFloorsAsync();
 }

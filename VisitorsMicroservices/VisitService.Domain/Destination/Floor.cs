@@ -1,6 +1,9 @@
-﻿namespace VisitService.Domain.Destination;
+﻿using VisitService.Domain.Common;
 
-public  class Floor : Building
+namespace VisitService.Domain.Destination;
+
+public class Floor : BaseNamedEntity
 {
+    public int CAMPUS_ID { get; set; }
     public int BUILDING_ID { get; set; }
 }
