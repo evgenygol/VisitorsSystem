@@ -1,4 +1,5 @@
-﻿using VisitService.Application.Repositories.Visits.Queries.Destination;
+﻿using VisitService.Application.Model;
+using VisitService.Application.Repositories.Visits.Queries.Destination;
 using VisitService.Application.Repositories.Visits.Queries.Visit;
 using VisitService.Domain.Destination;
 using VisitService.Domain.Visit;
@@ -34,8 +35,8 @@ public class VisitsRepository : IVisitsRepository
         _getFloorsQuery = getFloorsQuery;
     }
 
-    public Task<List<VisitGeneralInfo>> GetVisitsAsync() => _getVisitsQuery.GetVisitsAsync();
-    public Task<VisitGeneralInfo> GetVisitByIdAsync(int visitId) => _getVisitByIdQuery.GetVisitByIdAsync(visitId);
+    public Task<VisitsResultModel> GetVisitsAsync() => _getVisitsQuery.GetVisitsAsync();
+    public Task<VisitResultModel> GetVisitByIdAsync(int visitId) => _getVisitByIdQuery.GetVisitByIdAsync(visitId);
     public Task<List<VisitGeneralInfo>> GetVisitsByInviterIdAsync(int inviterId) => _getVisitsByInviterIdQuery.GetVisitsByInviterIdAsync(inviterId);
 
     public Task<List<VisitType>> GetVisitTypesAsync() => _getVisitTypesQuery.GetVisitTypesAsync();

@@ -1,4 +1,5 @@
-﻿using VisitService.Application.Repositories;
+﻿using VisitService.Application.Model;
+using VisitService.Application.Repositories;
 using VisitService.Application.Services.Interfaces;
 using VisitService.Domain.Destination;
 using VisitService.Domain.Visit;
@@ -14,8 +15,8 @@ public class VisitsService : IVisitsService
         _visitsRepository = visitsRepository;
     }
 
-    public async Task<List<VisitGeneralInfo>> GetVisitsAsync() => await _visitsRepository.GetVisitsAsync();
-    public async Task<VisitGeneralInfo> GetVisitByIdAsync(int visitId) => await _visitsRepository.GetVisitByIdAsync(visitId);
+    public async Task<VisitsResultModel> GetVisitsAsync() => await _visitsRepository.GetVisitsAsync();
+    public async Task<VisitResultModel> GetVisitByIdAsync(int visitId) => await _visitsRepository.GetVisitByIdAsync(visitId);
     public async Task<List<VisitGeneralInfo>> GetVisitsByInviterIdAsync(int inviterId) => await _visitsRepository.GetVisitsByInviterIdAsync(inviterId);
 
 
