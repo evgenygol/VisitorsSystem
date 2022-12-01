@@ -5,5 +5,5 @@ namespace VisitService.Application.Repositories.Visits.Queries.Visit;
 
 public interface IGetVisitByIdQuery
 {
-    Task<VisitResultModel> GetVisitByIdAsync(int visitId);
+    Task<DataResultModel<VisitGeneralInfo>> GetVisitByIdAsync(int visitId);
 }

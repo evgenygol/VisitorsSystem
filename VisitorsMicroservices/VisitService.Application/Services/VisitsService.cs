@@ -15,8 +15,8 @@ public class VisitsService : IVisitsService
         _visitsRepository = visitsRepository;
     }
 
-    public async Task<VisitsResultModel> GetVisitsAsync() => await _visitsRepository.GetVisitsAsync();
-    public async Task<VisitResultModel> GetVisitByIdAsync(int visitId) => await _visitsRepository.GetVisitByIdAsync(visitId);
+    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsAsync() => await _visitsRepository.GetVisitsAsync();
+    public async Task<DataResultModel<VisitGeneralInfo>> GetVisitByIdAsync(int visitId) => await _visitsRepository.GetVisitByIdAsync(visitId);
     public async Task<List<VisitGeneralInfo>> GetVisitsByInviterIdAsync(int inviterId) => await _visitsRepository.GetVisitsByInviterIdAsync(inviterId);
 
 

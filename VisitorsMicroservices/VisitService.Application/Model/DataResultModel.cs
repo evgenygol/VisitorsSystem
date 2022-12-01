@@ -2,9 +2,9 @@
 
 namespace VisitService.Application.Model;
 
-public class VisitResultModel
+public class DataResultModel<T>
 {
     public bool Success { get; set; }
-    public VisitGeneralInfo Visit { get; set; } = new();
+    public T DataResult { get; set; }
     public string ErrorMessage { get; set; } = string.Empty;
 }

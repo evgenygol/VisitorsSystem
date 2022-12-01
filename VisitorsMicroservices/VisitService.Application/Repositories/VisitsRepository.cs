@@ -35,8 +35,8 @@ public class VisitsRepository : IVisitsRepository
         _getFloorsQuery = getFloorsQuery;
     }
 
-    public Task<VisitsResultModel> GetVisitsAsync() => _getVisitsQuery.GetVisitsAsync();
-    public Task<VisitResultModel> GetVisitByIdAsync(int visitId) => _getVisitByIdQuery.GetVisitByIdAsync(visitId);
+    public Task<DataListResultModel<VisitGeneralInfo>> GetVisitsAsync() => _getVisitsQuery.GetVisitsAsync();
+    public Task<DataResultModel<VisitGeneralInfo>> GetVisitByIdAsync(int visitId) => _getVisitByIdQuery.GetVisitByIdAsync(visitId);
     public Task<List<VisitGeneralInfo>> GetVisitsByInviterIdAsync(int inviterId) => _getVisitsByInviterIdQuery.GetVisitsByInviterIdAsync(inviterId);
 
     public Task<List<VisitType>> GetVisitTypesAsync() => _getVisitTypesQuery.GetVisitTypesAsync();

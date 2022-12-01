@@ -18,24 +18,24 @@ public class GetVisitByIdQuery : IGetVisitByIdQuery
         _logger = logger;
     }
 
-    public async Task<VisitResultModel> GetVisitByIdAsync(int visitId)
+    public async Task<DataResultModel<VisitGeneralInfo>> GetVisitByIdAsync(int visitId)
 	{
         try
         {
             var visit = await _dbContext.VISIT_GENERAL_INFO.Where(x => x.ID == visitId).FirstOrDefaultAsync();
 
-            var result = new VisitResultModel();
+            var result = new DataResultModel<VisitGeneralInfo>();
 
             if (visit == null)
             {
                 result.Success = false;
-                result.Visit = new VisitGeneralInfo();
+                result.DataResult = new VisitGeneralInfo();
                 result.ErrorMessage = $"Visit with ID {visitId} not exists";
             }
             else
             {
                 result.Success = true;
-                result.Visit = visit;
+                result.DataResult = visit;
                 result.ErrorMessage = "";
             }
 
@@ -45,10 +45,10 @@ public class GetVisitByIdQuery : IGetVisitByIdQuery
         {
             _logger.LogError(ex, "{ErrorMessage}", ex.Message);
 
-            var result = new VisitResultModel
+            var result = new DataResultModel<VisitGeneralInfo>
             {
                 Success = false,
-                Visit = new VisitGeneralInfo(),
+                DataResult = new VisitGeneralInfo(),
                 ErrorMessage = "Get visit failed"
             };
 

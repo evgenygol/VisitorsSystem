@@ -18,21 +18,21 @@ public class VisitsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<VisitsResultModel> Get() => await _visitsService.GetVisitsAsync();
+    public async Task<DataListResultModel<VisitGeneralInfo>> Get() => await _visitsService.GetVisitsAsync();
 
     [HttpGet("{visitId}")]
-    public async Task<VisitResultModel> Get([FromRoute] int visitId) => await _visitsService.GetVisitByIdAsync(visitId);
+    public async Task<DataResultModel<VisitGeneralInfo>> Get([FromRoute] int visitId) => await _visitsService.GetVisitByIdAsync(visitId);
 
     [HttpGet("VisitsByInviterId/{inviterId}")]
     public async Task<List<VisitGeneralInfo>> GetVisitsByInviterId([FromRoute] int inviterId) => await _visitsService.GetVisitsByInviterIdAsync(inviterId);
 
     [Route(@"VisitsByDates/{startDate:DateTime}/{endDate:DateTime}")]
     [HttpGet]
-    public async Task<VisitsResultModel> GetVisitsByDates([FromRoute] DateTime startDate, [FromRoute] DateTime endDate) => await _visitsService.GetVisitsAsync();
+    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsByDates([FromRoute] DateTime startDate, [FromRoute] DateTime endDate) => await _visitsService.GetVisitsAsync();
 
     [Route(@"VisitsByDates/{startDateInMls:long}/{endDateInMls:long}")]
     [HttpGet]
-    public async Task<VisitsResultModel> GetVisitsByDates([FromRoute] long startDateInMls, [FromRoute] long endDateInMls) => await _visitsService.GetVisitsAsync();
+    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsByDates([FromRoute] long startDateInMls, [FromRoute] long endDateInMls) => await _visitsService.GetVisitsAsync();
 
     [HttpGet("GetVisitTypes")]
     public async Task<List<VisitType>> GetVisitTypes() => await _visitsService.GetVisitTypesAsync();

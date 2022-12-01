@@ -18,16 +18,16 @@ public class GetVisitsQuery : IGetVisitsQuery
         _logger = logger;
     }
 
-    public async Task<VisitsResultModel> GetVisitsAsync()
+    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsAsync()
     {
         try
         {
             var visits = await _dbContext.VISIT_GENERAL_INFO.ToListAsync();
 
-            var result = new VisitsResultModel
+            var result = new DataListResultModel<VisitGeneralInfo>
             {
                 Success = true,
-                Visits = visits,
+                DataResults = visits,
                 ErrorMessage = ""
             };
 
@@ -37,10 +37,10 @@ public class GetVisitsQuery : IGetVisitsQuery
         {
             _logger.LogError(ex, "{ErrorMessage}", ex.Message);
 
-            var result = new VisitsResultModel
+            var result = new DataListResultModel<VisitGeneralInfo>
             {
                 Success = false,
-                Visits = new List<VisitGeneralInfo>(),
+                DataResults = new List<VisitGeneralInfo>(),
                 ErrorMessage = "Get visits failed"
             };
 

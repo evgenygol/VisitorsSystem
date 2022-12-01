@@ -6,8 +6,8 @@ namespace VisitService.Application.Services.Interfaces;
 
 public interface IVisitsService
 {
-    Task<VisitsResultModel> GetVisitsAsync();
-    Task<VisitResultModel> GetVisitByIdAsync(int visitId);
+    Task<DataListResultModel<VisitGeneralInfo>> GetVisitsAsync();
+    Task<DataResultModel<VisitGeneralInfo>> GetVisitByIdAsync(int visitId);
     Task<List<VisitGeneralInfo>> GetVisitsByInviterIdAsync(int inviterId);
 
     Task<List<VisitType>> GetVisitTypesAsync();
