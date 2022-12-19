@@ -16,4 +16,5 @@ public interface IVisitsRepository
     Task<DataListResultModel<Campus>> GetCampusesAsync();
     Task<DataListResultModel<Building>> GetBuildingsAsync();
     Task<DataListResultModel<Floor>> GetFloorsAsync();
+    Task<DataResultModel<VisitGeneralInfo>> UpdateVisitDeleteStatusByIdAsync(int visitId);
 }

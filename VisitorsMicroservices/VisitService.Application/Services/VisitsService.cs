@@ -35,8 +35,6 @@ public class VisitsService : IVisitsService
     public async Task<DataListResultModel<Building>> GetBuildingsAsync() => await _visitsRepository.GetBuildingsAsync();
     public async Task<DataListResultModel<Floor>> GetFloorsAsync() => await _visitsRepository.GetFloorsAsync();
 
-    public Task<DataResultModel<VisitGeneralInfo>> DeleteVisitAsync(int visitId)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<DataResultModel<VisitGeneralInfo>> DeleteVisitAsync(int visitId) => await _visitsRepository.UpdateVisitDeleteStatusByIdAsync(visitId);
+
 }

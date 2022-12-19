@@ -52,6 +52,6 @@ public class VisitsController : ControllerBase
 
 
 
-    [HttpDelete]
+    [HttpDelete("{visitId}")]
     public async Task<DataResultModel<VisitGeneralInfo>> Delete([FromQuery] int visitId) => await _visitsService.DeleteVisitAsync(visitId);
 }

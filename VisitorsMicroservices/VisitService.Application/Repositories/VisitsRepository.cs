@@ -1,4 +1,5 @@
 ﻿using VisitService.Application.Model;
+using VisitService.Application.Repositories.Visits.Commands.Visit;
 using VisitService.Application.Repositories.Visits.Queries.Destination;
 using VisitService.Application.Repositories.Visits.Queries.Visit;
 using VisitService.Domain.Destination;
@@ -19,13 +20,15 @@ public class VisitsRepository : IVisitsRepository
     private readonly IGetBuildingsQuery _getBuildingsQuery;
     private readonly IGetFloorsQuery _getFloorsQuery;
 
-
+    private readonly IUpdateVisitDeleteStatusCommand _updateVisitDeleteStatusCommand;
 
     public VisitsRepository(IGetVisitsQuery getVisitsQuery, IGetVisitByIdQuery getVisitByIdQuery, 
         IGetVisitsByInviterIdQuery getVisitsByInviterIdQuery, IGetVisitTypesQuery getVisitTypesQuery,
         IGetVisitPurposesQuery getVisitPurposesQuery, IGetCampusesQuery getCampusesQuery,
         IGetBuildingsQuery getBuildingsQuery, IGetFloorsQuery getFloorsQuery,
-        IGetVisitsFilterByDatesQuery getVisitsFilterByDatesQuery)
+        IGetVisitsFilterByDatesQuery getVisitsFilterByDatesQuery,
+        IUpdateVisitDeleteStatusCommand updateVisitDeleteStatusCommand
+        )
     {
         _getVisitsQuery = getVisitsQuery;
         _getVisitTypesQuery = getVisitTypesQuery;
@@ -36,6 +39,7 @@ public class VisitsRepository : IVisitsRepository
         _getBuildingsQuery = getBuildingsQuery;
         _getFloorsQuery = getFloorsQuery;
         _getVisitsFilterByDatesQuery = getVisitsFilterByDatesQuery;
+        _updateVisitDeleteStatusCommand = updateVisitDeleteStatusCommand;
     }
 
     public Task<DataListResultModel<VisitGeneralInfo>> GetVisitsAsync() => _getVisitsQuery.GetVisitsAsync();
@@ -56,4 +60,5 @@ public class VisitsRepository : IVisitsRepository
 
     public Task<DataListResultModel<Floor>> GetFloorsAsync() => _getFloorsQuery.GetFloorsAsync();
 
+    public Task<DataResultModel<VisitGeneralInfo>> UpdateVisitDeleteStatusByIdAsync(int visitId) => _updateVisitDeleteStatusCommand.UpdateVisitDeleteStatusByIdAsync(visitId);
 }
