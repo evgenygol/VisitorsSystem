@@ -24,28 +24,28 @@ public class VisitsController : ControllerBase
     public async Task<DataResultModel<VisitGeneralInfo>> Get([FromRoute] int visitId) => await _visitsService.GetVisitByIdAsync(visitId);
 
     [HttpGet("VisitsByInviterId/{inviterId}")]
-    public async Task<List<VisitGeneralInfo>> GetVisitsByInviterId([FromRoute] int inviterId) => await _visitsService.GetVisitsByInviterIdAsync(inviterId);
+    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsByInviterId([FromRoute] int inviterId) => await _visitsService.GetVisitsByInviterIdAsync(inviterId);
 
-    [Route(@"VisitsByDates/{startDate:DateTime}/{endDate:DateTime}")]
+    [Route(@"GetVisitsFilterByDates/{startDate:DateTime}/{endDate:DateTime}")]
     [HttpGet]
-    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsByDates([FromRoute] DateTime startDate, [FromRoute] DateTime endDate) => await _visitsService.GetVisitsAsync();
+    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsFilterByDates([FromRoute] DateTime startDate, [FromRoute] DateTime endDate) => await _visitsService.GetVisitsFilterByDatesAsync(startDate, endDate);
 
-    [Route(@"VisitsByDates/{startDateInMls:long}/{endDateInMls:long}")]
+    [Route(@"GetVisitsFilterByTimeTicks/{startDateInTicks:long}/{endDateInTicks:long}")]
     [HttpGet]
-    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsByDates([FromRoute] long startDateInMls, [FromRoute] long endDateInMls) => await _visitsService.GetVisitsAsync();
+    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsFilterByTimeTicks([FromRoute] long startDateInTicks, [FromRoute] long endDateInTicks) => await _visitsService.GetVisitsFilterByTimeTicksAsync(startDateInTicks, endDateInTicks);
 
     [HttpGet("GetVisitTypes")]
-    public async Task<List<VisitType>> GetVisitTypes() => await _visitsService.GetVisitTypesAsync();
+    public async Task<DataListResultModel<VisitType>> GetVisitTypes() => await _visitsService.GetVisitTypesAsync();
 
     [HttpGet("GetVisitPurposes")]
-    public async Task<List<VisitPurpose>> GetVisitPurposes() => await _visitsService.GetVisitPurposesAsync();
+    public async Task<DataListResultModel<VisitPurpose>> GetVisitPurposes() => await _visitsService.GetVisitPurposesAsync();
 
     [HttpGet("GetCampuses")]
-    public async Task<List<Campus>> GetCampuses() => await _visitsService.GetCampusesAsync();
+    public async Task<DataListResultModel<Campus>> GetCampuses() => await _visitsService.GetCampusesAsync();
 
     [HttpGet("GetBuildings")]
-    public async Task<List<Building>> GetBuildings() => await _visitsService.GetBuildingsAsync();
+    public async Task<DataListResultModel<Building>> GetBuildings() => await _visitsService.GetBuildingsAsync();
 
     [HttpGet("GetFloors")]
-    public async Task<List<Floor>> GetFloors() => await _visitsService.GetFloorsAsync();
+    public async Task<DataListResultModel<Floor>> GetFloors() => await _visitsService.GetFloorsAsync();
 }

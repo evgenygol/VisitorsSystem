@@ -11,6 +11,8 @@ public class VisitsRepository : IVisitsRepository
     private readonly IGetVisitsQuery _getVisitsQuery;
     private readonly IGetVisitByIdQuery _getVisitByIdQuery;
     private readonly IGetVisitsByInviterIdQuery _getVisitsByInviterIdQuery;
+    private readonly IGetVisitsFilterByDatesQuery _getVisitsFilterByDatesQuery;
+
     private readonly IGetVisitTypesQuery _getVisitTypesQuery;
     private readonly IGetVisitPurposesQuery _getVisitPurposesQuery;
     private readonly IGetCampusesQuery _getCampusesQuery;
@@ -20,10 +22,10 @@ public class VisitsRepository : IVisitsRepository
 
 
     public VisitsRepository(IGetVisitsQuery getVisitsQuery, IGetVisitByIdQuery getVisitByIdQuery, 
-        IGetVisitsByInviterIdQuery getVisitsByInviterIdQuery, IGetVisitTypesQuery getVisitTypesQuery, 
+        IGetVisitsByInviterIdQuery getVisitsByInviterIdQuery, IGetVisitTypesQuery getVisitTypesQuery,
         IGetVisitPurposesQuery getVisitPurposesQuery, IGetCampusesQuery getCampusesQuery,
-        IGetBuildingsQuery getBuildingsQuery, IGetFloorsQuery getFloorsQuery
-        )
+        IGetBuildingsQuery getBuildingsQuery, IGetFloorsQuery getFloorsQuery,
+        IGetVisitsFilterByDatesQuery getVisitsFilterByDatesQuery)
     {
         _getVisitsQuery = getVisitsQuery;
         _getVisitTypesQuery = getVisitTypesQuery;
@@ -33,19 +35,25 @@ public class VisitsRepository : IVisitsRepository
         _getVisitsByInviterIdQuery = getVisitsByInviterIdQuery;
         _getBuildingsQuery = getBuildingsQuery;
         _getFloorsQuery = getFloorsQuery;
+        _getVisitsFilterByDatesQuery = getVisitsFilterByDatesQuery;
     }
 
     public Task<DataListResultModel<VisitGeneralInfo>> GetVisitsAsync() => _getVisitsQuery.GetVisitsAsync();
+    
     public Task<DataResultModel<VisitGeneralInfo>> GetVisitByIdAsync(int visitId) => _getVisitByIdQuery.GetVisitByIdAsync(visitId);
-    public Task<List<VisitGeneralInfo>> GetVisitsByInviterIdAsync(int inviterId) => _getVisitsByInviterIdQuery.GetVisitsByInviterIdAsync(inviterId);
+    
+    public Task<DataListResultModel<VisitGeneralInfo>> GetVisitsByInviterIdAsync(int inviterId) => _getVisitsByInviterIdQuery.GetVisitsByInviterIdAsync(inviterId);
+    
+    public Task<DataListResultModel<VisitGeneralInfo>> GetVisitsFilterByDatesAsync(DateTime startDate, DateTime endDate) => _getVisitsFilterByDatesQuery.GetVisitsFilterByDatesAsync(startDate, endDate);
 
-    public Task<List<VisitType>> GetVisitTypesAsync() => _getVisitTypesQuery.GetVisitTypesAsync();
 
-    public Task<List<VisitPurpose>> GetVisitPurposesAsync() => _getVisitPurposesQuery.GetVisitPurposesAsync();
+    public Task<DataListResultModel<VisitType>> GetVisitTypesAsync() => _getVisitTypesQuery.GetVisitTypesAsync();
 
-    public Task<List<Campus>> GetCampusesAsync() => _getCampusesQuery.GetCampusesAsync();
-    public Task<List<Building>> GetBuildingsAsync() => _getBuildingsQuery.GetBuildingsAsync();
+    public Task<DataListResultModel<VisitPurpose>> GetVisitPurposesAsync() => _getVisitPurposesQuery.GetVisitPurposesAsync();
 
-    public Task<List<Floor>> GetFloorsAsync() => _getFloorsQuery.GetFloorsAsync();
+    public Task<DataListResultModel<Campus>> GetCampusesAsync() => _getCampusesQuery.GetCampusesAsync();
+    public Task<DataListResultModel<Building>> GetBuildingsAsync() => _getBuildingsQuery.GetBuildingsAsync();
+
+    public Task<DataListResultModel<Floor>> GetFloorsAsync() => _getFloorsQuery.GetFloorsAsync();
 
 }

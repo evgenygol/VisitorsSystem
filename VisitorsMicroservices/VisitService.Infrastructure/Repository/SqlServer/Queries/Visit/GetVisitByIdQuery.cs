@@ -10,9 +10,9 @@ namespace VisitService.Infrastructure.Repository.SqlServer.Queries.Visit;
 public class GetVisitByIdQuery : IGetVisitByIdQuery
 {
     private readonly ApplicationDBContext _dbContext;
-    private readonly ILogger<GetVisitsQuery> _logger;
+    private readonly ILogger<GetVisitByIdQuery> _logger;
 
-    public GetVisitByIdQuery(ApplicationDBContext dbContext, ILogger<GetVisitsQuery> logger)
+    public GetVisitByIdQuery(ApplicationDBContext dbContext, ILogger<GetVisitByIdQuery> logger)
     {
         _dbContext = dbContext;
         _logger = logger;

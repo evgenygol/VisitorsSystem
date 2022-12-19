@@ -8,11 +8,14 @@ public interface IVisitsService
 {
     Task<DataListResultModel<VisitGeneralInfo>> GetVisitsAsync();
     Task<DataResultModel<VisitGeneralInfo>> GetVisitByIdAsync(int visitId);
-    Task<List<VisitGeneralInfo>> GetVisitsByInviterIdAsync(int inviterId);
+    Task<DataListResultModel<VisitGeneralInfo>> GetVisitsByInviterIdAsync(int inviterId);
+    Task<DataListResultModel<VisitGeneralInfo>> GetVisitsFilterByDatesAsync(DateTime startDate, DateTime endDate);
+    Task<DataListResultModel<VisitGeneralInfo>> GetVisitsFilterByTimeTicksAsync(long startDateInTicks, long endDateInTicks);
 
-    Task<List<VisitType>> GetVisitTypesAsync();
-    Task<List<VisitPurpose>> GetVisitPurposesAsync();
-    Task<List<Campus>> GetCampusesAsync();
-    Task<List<Building>> GetBuildingsAsync();
-    Task<List<Floor>> GetFloorsAsync();
+
+    Task<DataListResultModel<VisitType>> GetVisitTypesAsync();
+    Task<DataListResultModel<VisitPurpose>> GetVisitPurposesAsync();
+    Task<DataListResultModel<Campus>> GetCampusesAsync();
+    Task<DataListResultModel<Building>> GetBuildingsAsync();
+    Task<DataListResultModel<Floor>> GetFloorsAsync();
 }

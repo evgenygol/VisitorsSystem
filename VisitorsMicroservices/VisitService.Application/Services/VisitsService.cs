@@ -17,15 +17,22 @@ public class VisitsService : IVisitsService
 
     public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsAsync() => await _visitsRepository.GetVisitsAsync();
     public async Task<DataResultModel<VisitGeneralInfo>> GetVisitByIdAsync(int visitId) => await _visitsRepository.GetVisitByIdAsync(visitId);
-    public async Task<List<VisitGeneralInfo>> GetVisitsByInviterIdAsync(int inviterId) => await _visitsRepository.GetVisitsByInviterIdAsync(inviterId);
+    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsByInviterIdAsync(int inviterId) => await _visitsRepository.GetVisitsByInviterIdAsync(inviterId);
+    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsFilterByDatesAsync(DateTime startDate, DateTime endDate) => await _visitsRepository.GetVisitsFilterByDatesAsync(startDate, endDate);
+    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsFilterByTimeTicksAsync(long startDateInTicks, long endDateInTicks)
+    {
+        DateTime startDate = new DateTime(startDateInTicks);
+        DateTime endDate = new DateTime(endDateInTicks);
 
+        return await _visitsRepository.GetVisitsFilterByDatesAsync(startDate, endDate);
+    }
 
-    public async Task<List<VisitType>> GetVisitTypesAsync() => await _visitsRepository.GetVisitTypesAsync();
+    public async Task<DataListResultModel<VisitType>> GetVisitTypesAsync() => await _visitsRepository.GetVisitTypesAsync();
 
-    public async Task<List<VisitPurpose>> GetVisitPurposesAsync() => await _visitsRepository.GetVisitPurposesAsync();
+    public async Task<DataListResultModel<VisitPurpose>> GetVisitPurposesAsync() => await _visitsRepository.GetVisitPurposesAsync();
 
-    public async Task<List<Campus>> GetCampusesAsync() => await _visitsRepository.GetCampusesAsync();
-    public async Task<List<Building>> GetBuildingsAsync() => await _visitsRepository.GetBuildingsAsync();
-    public async Task<List<Floor>> GetFloorsAsync() => await _visitsRepository.GetFloorsAsync();
+    public async Task<DataListResultModel<Campus>> GetCampusesAsync() => await _visitsRepository.GetCampusesAsync();
+    public async Task<DataListResultModel<Building>> GetBuildingsAsync() => await _visitsRepository.GetBuildingsAsync();
+    public async Task<DataListResultModel<Floor>> GetFloorsAsync() => await _visitsRepository.GetFloorsAsync();
 
 }

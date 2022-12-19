@@ -7,22 +7,21 @@ using VisitService.Infrastructure.Persistence;
 
 namespace VisitService.Infrastructure.Repository.SqlServer.Queries.Visit;
 
-public class GetVisitsQuery : IGetVisitsQuery
+public class GetVisitsFilterByDatesQuery : IGetVisitsFilterByDatesQuery
 {
     private readonly ApplicationDBContext _dbContext;
-    private readonly ILogger<GetVisitsQuery> _logger;
+    private readonly ILogger<GetVisitsFilterByDatesQuery> _logger;
 
-    public GetVisitsQuery(ApplicationDBContext dbContext, ILogger<GetVisitsQuery> logger)
+    public GetVisitsFilterByDatesQuery(ApplicationDBContext dbContext, ILogger<GetVisitsFilterByDatesQuery> logger)
     {
         _dbContext = dbContext;
         _logger = logger;
     }
-
-    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsAsync()
+    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsFilterByDatesAsync(DateTime startDate, DateTime endDate)
     {
         try
         {
-            var visits = await _dbContext.VISIT_GENERAL_INFO.Where(x => x.DELETED == false).ToListAsync();
+            var visits = await _dbContext.VISIT_GENERAL_INFO.Where(x => x.VISIT_START_DATE >= startDate && x.VISIT_END_DATE <= endDate && x.DELETED == false).ToListAsync();
 
             var result = new DataListResultModel<VisitGeneralInfo>
             {

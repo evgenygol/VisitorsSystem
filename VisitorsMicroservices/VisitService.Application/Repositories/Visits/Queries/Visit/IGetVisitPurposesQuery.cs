@@ -1,8 +1,9 @@
-﻿using VisitService.Domain.Visit;
+﻿using VisitService.Application.Model;
+using VisitService.Domain.Visit;
 
 namespace VisitService.Application.Repositories.Visits.Queries.Visit;
 
 public interface IGetVisitPurposesQuery
 {
-    Task<List<VisitPurpose>> GetVisitPurposesAsync();
+    Task<DataListResultModel<VisitPurpose>> GetVisitPurposesAsync();
 }

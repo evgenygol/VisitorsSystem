@@ -1,9 +1,10 @@
-﻿using VisitService.Domain.Visit;
+﻿using VisitService.Application.Model;
+using VisitService.Domain.Visit;
 
 namespace VisitService.Application.Repositories.Visits.Queries.Visit;
 
 public interface IGetVisitTypesQuery
 {
-    Task<List<VisitType>> GetVisitTypesAsync();
+    Task<DataListResultModel<VisitType>> GetVisitTypesAsync();
 
 }

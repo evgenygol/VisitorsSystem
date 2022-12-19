@@ -24,7 +24,7 @@ public static class ServicesCollectionExtension
                 options.UseSqlServer(settings.VisitsDBConnectionString,
                 b => b.MigrationsAssembly(typeof(ApplicationDBContext).Assembly.FullName)), ServiceLifetime.Transient);
 
-        services.AddScoped<IApplicationDBContext>(provider => provider.GetService<ApplicationDBContext>());
+        services.AddScoped<IApplicationDBContext>(provider => provider.GetRequiredService<ApplicationDBContext>());
 
         services.AddScoped<IVisitsService, VisitsService>();
         services.AddScoped<IVisitsRepository, VisitsRepository>();
@@ -32,6 +32,7 @@ public static class ServicesCollectionExtension
         services.AddScoped<IGetVisitsQuery, GetVisitsQuery>();
         services.AddScoped<IGetVisitByIdQuery, GetVisitByIdQuery>();
         services.AddScoped<IGetVisitsByInviterIdQuery, GetVisitsByInviterIdQuery>();
+        services.AddScoped<IGetVisitsFilterByDatesQuery, GetVisitsFilterByDatesQuery>();
 
         services.AddScoped<IGetVisitTypesQuery, GetVisitTypesQuery>();
         services.AddScoped<IGetVisitPurposesQuery, GetVisitPurposesQuery>();
