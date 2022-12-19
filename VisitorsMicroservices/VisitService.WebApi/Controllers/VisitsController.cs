@@ -48,4 +48,10 @@ public class VisitsController : ControllerBase
 
     [HttpGet("GetFloors")]
     public async Task<DataListResultModel<Floor>> GetFloors() => await _visitsService.GetFloorsAsync();
+
+
+
+
+    [HttpDelete]
+    public async Task<DataResultModel<VisitGeneralInfo>> Delete([FromQuery] int visitId) => await _visitsService.DeleteVisitAsync(visitId);
 }
