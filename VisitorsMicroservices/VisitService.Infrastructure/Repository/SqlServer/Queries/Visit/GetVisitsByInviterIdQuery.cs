@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using VisitService.Application.Model;
 using VisitService.Application.Repositories.Visits.Queries.Visit;
+using VisitService.Domain.DTO;
 using VisitService.Domain.Entity.Visit;
 using VisitService.Infrastructure.Persistence;
 
@@ -16,30 +17,40 @@ public class GetVisitsByInviterIdQuery: IGetVisitsByInviterIdQuery
         _dbContext = dbContext;
         _logger = logger;
     }
-    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsByInviterIdAsync(int inviterId)
+    public async Task<DataListResultModel<VisitGeneralInfoDTO>> GetVisitsByInviterIdAsync(int inviterId)
     {
 
         try
         {
             var visits = await _dbContext.VISIT_GENERAL_INFO.Where(x => x.INVITER_ID == inviterId && x.DELETED == false).ToListAsync();
 
-            var result = new DataListResultModel<VisitGeneralInfo>
+
+            var result = new DataListResultModel<VisitGeneralInfoDTO>
             {
                 Success = true,
-                DataResults = visits,
                 ErrorMessage = "",
             };
+
+            foreach (var visit in visits)
+            {
+                var visitDTO = new VisitGeneralInfoDTO();
+                visitDTO.VisitGeneralInfo = visit;
+
+                var visitDestinations = await _dbContext.VISIT_DESTINATION_INFO.Where(x => x.VISIT_ID == visit.ID).ToListAsync();
+                visitDTO.VisitDestinationInfo = visitDestinations;
+                result.DataResults.Add(visitDTO);
+            }
 
             return result;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "{ErrorMessage}", ex.Message);
+            _logger.LogError(ex, "{GetVisitsByInviterId}", ex.Message);
 
-            var result = new DataListResultModel<VisitGeneralInfo>
+            var result = new DataListResultModel<VisitGeneralInfoDTO>
             {
                 Success = false,
-                DataResults = new List<VisitGeneralInfo>(),
+                DataResults = new List<VisitGeneralInfoDTO>(),
                 ErrorMessage = "Get visits failed"
             };
 

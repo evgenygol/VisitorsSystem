@@ -19,21 +19,21 @@ public class VisitsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<DataListResultModel<VisitGeneralInfo>> Get() => await _visitsService.GetVisitsAsync();
+    public async Task<DataListResultModel<VisitGeneralInfoDTO>> Get() => await _visitsService.GetVisitsAsync();
 
     [HttpGet("{visitId}")]
     public async Task<DataResultModel<VisitGeneralInfoDTO>> Get([FromRoute] int visitId) => await _visitsService.GetVisitByIdAsync(visitId);
 
     [HttpGet("VisitsByInviterId/{inviterId}")]
-    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsByInviterId([FromRoute] int inviterId) => await _visitsService.GetVisitsByInviterIdAsync(inviterId);
+    public async Task<DataListResultModel<VisitGeneralInfoDTO>> GetVisitsByInviterId([FromRoute] int inviterId) => await _visitsService.GetVisitsByInviterIdAsync(inviterId);
 
     [Route(@"GetVisitsFilterByDates/{startDate:DateTime}/{endDate:DateTime}")]
     [HttpGet]
-    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsFilterByDates([FromRoute] DateTime startDate, [FromRoute] DateTime endDate) => await _visitsService.GetVisitsFilterByDatesAsync(startDate, endDate);
+    public async Task<DataListResultModel<VisitGeneralInfoDTO>> GetVisitsFilterByDates([FromRoute] DateTime startDate, [FromRoute] DateTime endDate) => await _visitsService.GetVisitsFilterByDatesAsync(startDate, endDate);
 
     [Route(@"GetVisitsFilterByTimeTicks/{startDateInTicks:long}/{endDateInTicks:long}")]
     [HttpGet]
-    public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsFilterByTimeTicks([FromRoute] long startDateInTicks, [FromRoute] long endDateInTicks) => await _visitsService.GetVisitsFilterByTimeTicksAsync(startDateInTicks, endDateInTicks);
+    public async Task<DataListResultModel<VisitGeneralInfoDTO>> GetVisitsFilterByTimeTicks([FromRoute] long startDateInTicks, [FromRoute] long endDateInTicks) => await _visitsService.GetVisitsFilterByTimeTicksAsync(startDateInTicks, endDateInTicks);
 
     [HttpGet("GetVisitTypes")]
     public async Task<DataListResultModel<VisitType>> GetVisitTypes() => await _visitsService.GetVisitTypesAsync();
@@ -51,13 +51,13 @@ public class VisitsController : ControllerBase
 
 
     [HttpDelete("{visitId}")]
-    public async Task<DataResultModel<VisitGeneralInfo>> Delete(int visitId) => await _visitsService.DeleteVisitAsync(visitId);
+    public async Task<DataResultModel<VisitGeneralInfoDTO>> Delete(int visitId) => await _visitsService.DeleteVisitAsync(visitId);
 
 
-
+    [Route(@"AddVisit")]
     [HttpPost]
-    public async Task<DataResultModel<VisitGeneralInfoDTO>> Post([FromBody] VisitGeneralInfoDTO visit)
-    {
-        return await _visitsService.ProcessVisitAsync(visit);
-    }
+    public async Task<DataResultModel<VisitGeneralInfoDTO>> AddVisit([FromBody] VisitGeneralInfoDTO visit) => await _visitsService.ProcessAddVisitAsync(visit);
+    [Route(@"UpdateVisit")]
+    [HttpPost]
+    public async Task<DataResultModel<VisitGeneralInfoDTO>> UpdateVisit([FromBody] VisitGeneralInfoDTO visit) => await _visitsService.ProcessUpdateVisitAsync(visit);
 }

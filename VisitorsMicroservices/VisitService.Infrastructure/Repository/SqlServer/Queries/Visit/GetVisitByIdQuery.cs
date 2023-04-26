@@ -53,7 +53,7 @@ public class GetVisitByIdQuery : IGetVisitByIdQuery
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "{ErrorMessage}", ex.Message);
+            _logger.LogError(ex, "{GetVisitById}", ex.Message);
 
             var result = new DataResultModel<VisitGeneralInfoDTO>
             {

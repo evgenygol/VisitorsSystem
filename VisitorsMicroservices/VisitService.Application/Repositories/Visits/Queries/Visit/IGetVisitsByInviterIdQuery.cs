@@ -1,9 +1,9 @@
 ﻿using VisitService.Application.Model;
-using VisitService.Domain.Entity.Visit;
+using VisitService.Domain.DTO;
 
 namespace VisitService.Application.Repositories.Visits.Queries.Visit;
 
 public interface IGetVisitsByInviterIdQuery
 {
-    Task<DataListResultModel<VisitGeneralInfo>> GetVisitsByInviterIdAsync(int inviterId);
+    Task<DataListResultModel<VisitGeneralInfoDTO>> GetVisitsByInviterIdAsync(int inviterId);
 }

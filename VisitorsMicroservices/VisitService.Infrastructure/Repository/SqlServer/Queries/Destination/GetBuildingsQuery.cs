@@ -36,7 +36,7 @@ internal class GetBuildingsQuery : IGetBuildingsQuery
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "{ErrorMessage}", ex.Message);
+            _logger.LogError(ex, "{GetBuildings}", ex.Message);
 
             var result = new DataListResultModel<Building>
             {

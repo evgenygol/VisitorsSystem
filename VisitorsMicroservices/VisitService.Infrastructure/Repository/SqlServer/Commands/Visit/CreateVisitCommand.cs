@@ -1,9 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VisitService.Application.Model;
 using VisitService.Application.Repositories.Visits.Commands.Visit;
 using VisitService.Domain.DTO;
@@ -12,18 +7,18 @@ using VisitService.Infrastructure.Persistence;
 
 namespace VisitService.Infrastructure.Repository.SqlServer.Commands.Visit
 {
-    public class AddVisitCommand : IAddVisitCommand
+    public class CreateVisitCommand : ICreateVisitCommand
     {
         private readonly ApplicationDBContext _dbContext;
-        private readonly ILogger<AddVisitCommand> _logger;
+        private readonly ILogger<CreateVisitCommand> _logger;
 
-        public AddVisitCommand(ApplicationDBContext dbContext, ILogger<AddVisitCommand> logger)
+        public CreateVisitCommand(ApplicationDBContext dbContext, ILogger<CreateVisitCommand> logger)
         {
             _dbContext = dbContext;
             _logger = logger;
         }
 
-        public async Task<DataResultModel<VisitGeneralInfoDTO>> AddVisitAsync(VisitGeneralInfoDTO visit)
+        public async Task<DataResultModel<VisitGeneralInfoDTO>> CreateVisitAsync(VisitGeneralInfoDTO visit)
         {
             try
             {
@@ -56,18 +51,17 @@ namespace VisitService.Infrastructure.Repository.SqlServer.Commands.Visit
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "{ErrorMessage}", ex.Message);
+                _logger.LogError(ex, "{CreateVisit}", ex.Message);
 
                 var result = new DataResultModel<VisitGeneralInfoDTO>
                 {
                     Success = false,
                     DataResult = new VisitGeneralInfoDTO(),
-                    ErrorMessage = "Add visit failed"
+                    ErrorMessage = "Create visit failed"
                 };
 
                 return result;
             }
-
         }
     }
 }

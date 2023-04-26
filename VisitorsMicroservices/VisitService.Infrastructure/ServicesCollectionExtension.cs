@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VisitService.Application.Common.Interfaces;
 using VisitService.Application.Configuration;
@@ -43,7 +42,8 @@ public static class ServicesCollectionExtension
 
         services.AddScoped<IUpdateVisitDeleteStatusCommand, UpdateVisitDeleteStatusCommand>();
 
-        services.AddScoped<IAddVisitCommand, AddVisitCommand>();
+        services.AddScoped<ICreateVisitCommand, CreateVisitCommand>();
+        services.AddScoped<IUpdateVisitCommand, UpdateVisitCommand>();
 
     }
 }

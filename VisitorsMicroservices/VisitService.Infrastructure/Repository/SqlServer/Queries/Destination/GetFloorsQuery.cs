@@ -35,7 +35,7 @@ internal class GetFloorsQuery : IGetFloorsQuery
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "{ErrorMessage}", ex.Message);
+            _logger.LogError(ex, "{GetFloors}", ex.Message);
 
             var result = new DataListResultModel<Floor>
             {

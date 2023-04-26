@@ -1,9 +1,9 @@
 ﻿using VisitService.Application.Model;
-using VisitService.Domain.Entity.Visit;
+using VisitService.Domain.DTO;
 
 namespace VisitService.Application.Repositories.Visits.Queries.Visit;
 
 public interface IGetVisitsQuery
 {
-    Task<DataListResultModel<VisitGeneralInfo>> GetVisitsAsync();
+    Task<DataListResultModel<VisitGeneralInfoDTO>> GetVisitsAsync();
 }

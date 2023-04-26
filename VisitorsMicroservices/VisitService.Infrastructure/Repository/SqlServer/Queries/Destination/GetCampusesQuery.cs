@@ -36,7 +36,7 @@ internal class GetCampusesQuery : IGetCampusesQuery
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "{ErrorMessage}", ex.Message);
+            _logger.LogError(ex, "{GetCampuses}", ex.Message);
 
             var result = new DataListResultModel<Campus>
             {

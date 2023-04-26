@@ -11,5 +11,6 @@ public interface IApplicationDBContext
     DbSet<Campus> CAMPUSES { get; set; }
     DbSet<Building> BUILDINGS { get; set; }
     DbSet<Floor> FLOORS { get; set; }
+    DbSet<VisitDestinationInfo> VISIT_DESTINATION_INFO { get; set; }
 
 }

@@ -35,7 +35,7 @@ internal class GetVisitTypesQuery : IGetVisitTypesQuery
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "{ErrorMessage}", ex.Message);
+            _logger.LogError(ex, "{GetVisitTypes}", ex.Message);
 
             var result = new DataListResultModel<VisitType>
             {

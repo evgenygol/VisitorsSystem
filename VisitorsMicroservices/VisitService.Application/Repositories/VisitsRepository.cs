@@ -22,16 +22,16 @@ public class VisitsRepository : IVisitsRepository
 
     private readonly IUpdateVisitDeleteStatusCommand _updateVisitDeleteStatusCommand;
 
-    private readonly IAddVisitCommand _addVisitCommand;
+    private readonly ICreateVisitCommand _createVisitCommand;
+    private readonly IUpdateVisitCommand _updateVisitCommand;
 
 
     public VisitsRepository(IGetVisitsQuery getVisitsQuery, IGetVisitByIdQuery getVisitByIdQuery, 
         IGetVisitsByInviterIdQuery getVisitsByInviterIdQuery, IGetVisitTypesQuery getVisitTypesQuery,
-        IGetCampusesQuery getCampusesQuery,
-        IGetBuildingsQuery getBuildingsQuery, IGetFloorsQuery getFloorsQuery,
-        IGetVisitsFilterByDatesQuery getVisitsFilterByDatesQuery,
-        IUpdateVisitDeleteStatusCommand updateVisitDeleteStatusCommand,
-        IAddVisitCommand addVisitCommand
+        IGetCampusesQuery getCampusesQuery,IGetBuildingsQuery getBuildingsQuery,
+        IGetFloorsQuery getFloorsQuery, IGetVisitsFilterByDatesQuery getVisitsFilterByDatesQuery,
+        IUpdateVisitDeleteStatusCommand updateVisitDeleteStatusCommand, ICreateVisitCommand createVisitCommand,
+        IUpdateVisitCommand updateVisitCommand
         )
     {
         _getVisitsQuery = getVisitsQuery;
@@ -43,16 +43,17 @@ public class VisitsRepository : IVisitsRepository
         _getFloorsQuery = getFloorsQuery;
         _getVisitsFilterByDatesQuery = getVisitsFilterByDatesQuery;
         _updateVisitDeleteStatusCommand = updateVisitDeleteStatusCommand;
-        _addVisitCommand = addVisitCommand;
+        _createVisitCommand = createVisitCommand;
+        _updateVisitCommand = updateVisitCommand;
     }
 
-    public Task<DataListResultModel<VisitGeneralInfo>> GetVisitsAsync() => _getVisitsQuery.GetVisitsAsync();
+    public Task<DataListResultModel<VisitGeneralInfoDTO>> GetVisitsAsync() => _getVisitsQuery.GetVisitsAsync();
     
     public Task<DataResultModel<VisitGeneralInfoDTO>> GetVisitByIdAsync(int visitId) => _getVisitByIdQuery.GetVisitByIdAsync(visitId);
     
-    public Task<DataListResultModel<VisitGeneralInfo>> GetVisitsByInviterIdAsync(int inviterId) => _getVisitsByInviterIdQuery.GetVisitsByInviterIdAsync(inviterId);
+    public Task<DataListResultModel<VisitGeneralInfoDTO>> GetVisitsByInviterIdAsync(int inviterId) => _getVisitsByInviterIdQuery.GetVisitsByInviterIdAsync(inviterId);
     
-    public Task<DataListResultModel<VisitGeneralInfo>> GetVisitsFilterByDatesAsync(DateTime startDate, DateTime endDate) => _getVisitsFilterByDatesQuery.GetVisitsFilterByDatesAsync(startDate, endDate);
+    public Task<DataListResultModel<VisitGeneralInfoDTO>> GetVisitsFilterByDatesAsync(DateTime startDate, DateTime endDate) => _getVisitsFilterByDatesQuery.GetVisitsFilterByDatesAsync(startDate, endDate);
 
 
     public Task<DataListResultModel<VisitType>> GetVisitTypesAsync() => _getVisitTypesQuery.GetVisitTypesAsync();
@@ -62,10 +63,8 @@ public class VisitsRepository : IVisitsRepository
 
     public Task<DataListResultModel<Floor>> GetFloorsAsync() => _getFloorsQuery.GetFloorsAsync();
 
-    public Task<DataResultModel<VisitGeneralInfo>> UpdateVisitDeleteStatusByIdAsync(int visitId) => _updateVisitDeleteStatusCommand.UpdateVisitDeleteStatusByIdAsync(visitId);
+    public Task<DataResultModel<VisitGeneralInfoDTO>> UpdateVisitDeleteStatusByIdAsync(int visitId) => _updateVisitDeleteStatusCommand.UpdateVisitDeleteStatusByIdAsync(visitId);
 
-    public Task<DataResultModel<VisitGeneralInfoDTO>> UpdateVisitAsync(VisitGeneralInfoDTO visit)
-    {
-        return _addVisitCommand.AddVisitAsync(visit);
-    }
+    public Task<DataResultModel<VisitGeneralInfoDTO>> CreateVisitAsync(VisitGeneralInfoDTO visit) => _createVisitCommand.CreateVisitAsync(visit);
+    public Task<DataResultModel<VisitGeneralInfoDTO>> UpdateVisitAsync(VisitGeneralInfoDTO visit) => _updateVisitCommand.UpdateVisitAsync(visit);
 }

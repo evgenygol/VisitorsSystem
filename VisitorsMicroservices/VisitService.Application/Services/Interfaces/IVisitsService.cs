@@ -7,11 +7,11 @@ namespace VisitService.Application.Services.Interfaces;
 
 public interface IVisitsService
 {
-    Task<DataListResultModel<VisitGeneralInfo>> GetVisitsAsync();
+    Task<DataListResultModel<VisitGeneralInfoDTO>> GetVisitsAsync();
     Task<DataResultModel<VisitGeneralInfoDTO>> GetVisitByIdAsync(int visitId);
-    Task<DataListResultModel<VisitGeneralInfo>> GetVisitsByInviterIdAsync(int inviterId);
-    Task<DataListResultModel<VisitGeneralInfo>> GetVisitsFilterByDatesAsync(DateTime startDate, DateTime endDate);
-    Task<DataListResultModel<VisitGeneralInfo>> GetVisitsFilterByTimeTicksAsync(long startDateInTicks, long endDateInTicks);
+    Task<DataListResultModel<VisitGeneralInfoDTO>> GetVisitsByInviterIdAsync(int inviterId);
+    Task<DataListResultModel<VisitGeneralInfoDTO>> GetVisitsFilterByDatesAsync(DateTime startDate, DateTime endDate);
+    Task<DataListResultModel<VisitGeneralInfoDTO>> GetVisitsFilterByTimeTicksAsync(long startDateInTicks, long endDateInTicks);
 
 
     Task<DataListResultModel<VisitType>> GetVisitTypesAsync();
@@ -20,9 +20,10 @@ public interface IVisitsService
     Task<DataListResultModel<Floor>> GetFloorsAsync();
 
 
-    Task<DataResultModel<VisitGeneralInfo>> DeleteVisitAsync(int visitId);
+    Task<DataResultModel<VisitGeneralInfoDTO>> DeleteVisitAsync(int visitId);
 
 
-    Task<DataResultModel<VisitGeneralInfoDTO>> ProcessVisitAsync(VisitGeneralInfoDTO visit);
+    Task<DataResultModel<VisitGeneralInfoDTO>> ProcessAddVisitAsync(VisitGeneralInfoDTO visit);
+    Task<DataResultModel<VisitGeneralInfoDTO>> ProcessUpdateVisitAsync(VisitGeneralInfoDTO visit);
 
 }

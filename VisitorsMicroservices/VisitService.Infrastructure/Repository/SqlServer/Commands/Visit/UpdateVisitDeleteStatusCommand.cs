@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-//using System.Data.Entity;
 using VisitService.Application.Model;
 using VisitService.Application.Repositories.Visits.Commands.Visit;
-using VisitService.Domain.Entity.Visit;
+using VisitService.Domain.DTO;
 using VisitService.Infrastructure.Persistence;
 
 namespace VisitService.Infrastructure.Repository.SqlServer.Commands.Visit;
@@ -18,18 +17,18 @@ public class UpdateVisitDeleteStatusCommand : IUpdateVisitDeleteStatusCommand
         _dbContext = dbContext;
         _logger = logger;
     }
-    public async Task<DataResultModel<VisitGeneralInfo>> UpdateVisitDeleteStatusByIdAsync(int visitId)
+    public async Task<DataResultModel<VisitGeneralInfoDTO>> UpdateVisitDeleteStatusByIdAsync(int visitId)
     {
         try
         {
             var visit = await _dbContext.VISIT_GENERAL_INFO.Where(x => x.ID == visitId).FirstOrDefaultAsync();
 
-            var result = new DataResultModel<VisitGeneralInfo>();
+            var result = new DataResultModel<VisitGeneralInfoDTO>();
 
             if (visit == null)
             {
                 result.Success = false;
-                result.DataResult = new VisitGeneralInfo();
+                result.DataResult = new VisitGeneralInfoDTO();
                 result.ErrorMessage = $"Visit with ID {visitId} not exists";
             }
             else
@@ -39,7 +38,7 @@ public class UpdateVisitDeleteStatusCommand : IUpdateVisitDeleteStatusCommand
                 _dbContext.SaveChanges();
 
                 result.Success = true;
-                result.DataResult = visit;
+                result.DataResult.VisitGeneralInfo = visit;
                 result.ErrorMessage = "";
             }
 
@@ -47,12 +46,12 @@ public class UpdateVisitDeleteStatusCommand : IUpdateVisitDeleteStatusCommand
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "{ErrorMessage}", ex.Message);
+            _logger.LogError(ex, "{UpdateVisitDeleteStatus}", ex.Message);
 
-            var result = new DataResultModel<VisitGeneralInfo>
+            var result = new DataResultModel<VisitGeneralInfoDTO>
             {
                 Success = false,
-                DataResult = new VisitGeneralInfo(),
+                DataResult = new VisitGeneralInfoDTO(),
                 ErrorMessage = "Delete visit failed"
             };
 
