@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VisitService.Application.Model;
 using VisitService.Application.Services.Interfaces;
-using VisitService.Domain.Destination;
-using VisitService.Domain.Visit;
+using VisitService.Domain.Entity.Destination;
+using VisitService.Domain.DTO;
+using VisitService.Domain.Entity.Visit;
 
 namespace VisitService.Api.Controllers;
 
@@ -21,7 +22,7 @@ public class VisitsController : ControllerBase
     public async Task<DataListResultModel<VisitGeneralInfo>> Get() => await _visitsService.GetVisitsAsync();
 
     [HttpGet("{visitId}")]
-    public async Task<DataResultModel<VisitGeneralInfo>> Get([FromRoute] int visitId) => await _visitsService.GetVisitByIdAsync(visitId);
+    public async Task<DataResultModel<VisitGeneralInfoDTO>> Get([FromRoute] int visitId) => await _visitsService.GetVisitByIdAsync(visitId);
 
     [HttpGet("VisitsByInviterId/{inviterId}")]
     public async Task<DataListResultModel<VisitGeneralInfo>> GetVisitsByInviterId([FromRoute] int inviterId) => await _visitsService.GetVisitsByInviterIdAsync(inviterId);
@@ -37,9 +38,6 @@ public class VisitsController : ControllerBase
     [HttpGet("GetVisitTypes")]
     public async Task<DataListResultModel<VisitType>> GetVisitTypes() => await _visitsService.GetVisitTypesAsync();
 
-    [HttpGet("GetVisitPurposes")]
-    public async Task<DataListResultModel<VisitPurpose>> GetVisitPurposes() => await _visitsService.GetVisitPurposesAsync();
-
     [HttpGet("GetCampuses")]
     public async Task<DataListResultModel<Campus>> GetCampuses() => await _visitsService.GetCampusesAsync();
 
@@ -53,5 +51,13 @@ public class VisitsController : ControllerBase
 
 
     [HttpDelete("{visitId}")]
-    public async Task<DataResultModel<VisitGeneralInfo>> Delete([FromQuery] int visitId) => await _visitsService.DeleteVisitAsync(visitId);
+    public async Task<DataResultModel<VisitGeneralInfo>> Delete(int visitId) => await _visitsService.DeleteVisitAsync(visitId);
+
+
+
+    [HttpPost]
+    public async Task<DataResultModel<VisitGeneralInfoDTO>> Post([FromBody] VisitGeneralInfoDTO visit)
+    {
+        return await _visitsService.ProcessVisitAsync(visit);
+    }
 }

@@ -3,10 +3,10 @@ using Microsoft.Extensions.Logging;
 //using System.Data.Entity;
 using VisitService.Application.Model;
 using VisitService.Application.Repositories.Visits.Commands.Visit;
-using VisitService.Domain.Visit;
+using VisitService.Domain.Entity.Visit;
 using VisitService.Infrastructure.Persistence;
 
-namespace VisitService.Infrastructure.Repository.SqlServer.Commands;
+namespace VisitService.Infrastructure.Repository.SqlServer.Commands.Visit;
 
 public class UpdateVisitDeleteStatusCommand : IUpdateVisitDeleteStatusCommand
 {
@@ -35,6 +35,7 @@ public class UpdateVisitDeleteStatusCommand : IUpdateVisitDeleteStatusCommand
             else
             {
                 visit.DELETED = true;
+                visit.LAST_CHANGED = DateTime.Now;
                 _dbContext.SaveChanges();
 
                 result.Success = true;

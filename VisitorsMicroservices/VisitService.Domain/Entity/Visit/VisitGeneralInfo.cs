@@ -1,6 +1,6 @@
 ﻿using VisitService.Domain.Common;
 
-namespace VisitService.Domain.Visit;
+namespace VisitService.Domain.Entity.Visit;
 
 public class VisitGeneralInfo : BaseEntity<int>
 {
@@ -15,5 +15,5 @@ public class VisitGeneralInfo : BaseEntity<int>
     public DateTime CREATED { get; set; }
     public DateTime LAST_CHANGED { get; set; }
     public int LAST_CHANGED_BY_EMPID { get; set; }
-    public bool DELETED { get; set; }
+    public bool DELETED { get; set; } = false;
 }

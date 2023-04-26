@@ -1,6 +1,4 @@
-﻿using VisitService.Domain.Visit;
-
-namespace VisitService.Application.Model;
+﻿namespace VisitService.Application.Model;
 
 public class DataListResultModel<T>
 {

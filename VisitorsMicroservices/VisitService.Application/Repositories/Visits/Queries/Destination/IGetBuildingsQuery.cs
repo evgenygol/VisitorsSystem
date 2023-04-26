@@ -1,5 +1,5 @@
 ﻿using VisitService.Application.Model;
-using VisitService.Domain.Destination;
+using VisitService.Domain.Entity.Destination;
 
 namespace VisitService.Application.Repositories.Visits.Queries.Destination;
 

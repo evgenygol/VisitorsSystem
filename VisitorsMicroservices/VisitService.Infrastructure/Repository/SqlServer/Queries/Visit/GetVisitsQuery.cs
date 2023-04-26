@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using VisitService.Application.Model;
 using VisitService.Application.Repositories.Visits.Queries.Visit;
-using VisitService.Domain.Visit;
+using VisitService.Domain.Entity.Visit;
 using VisitService.Infrastructure.Persistence;
 
 namespace VisitService.Infrastructure.Repository.SqlServer.Queries.Visit;

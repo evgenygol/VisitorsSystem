@@ -10,7 +10,7 @@ using VisitService.Application.Repositories.Visits.Queries.Visit;
 using VisitService.Application.Services;
 using VisitService.Application.Services.Interfaces;
 using VisitService.Infrastructure.Persistence;
-using VisitService.Infrastructure.Repository.SqlServer.Commands;
+using VisitService.Infrastructure.Repository.SqlServer.Commands.Visit;
 using VisitService.Infrastructure.Repository.SqlServer.Queries.Destination;
 using VisitService.Infrastructure.Repository.SqlServer.Queries.Visit;
 
@@ -37,12 +37,13 @@ public static class ServicesCollectionExtension
         services.AddScoped<IGetVisitsFilterByDatesQuery, GetVisitsFilterByDatesQuery>();
 
         services.AddScoped<IGetVisitTypesQuery, GetVisitTypesQuery>();
-        services.AddScoped<IGetVisitPurposesQuery, GetVisitPurposesQuery>();
         services.AddScoped<IGetCampusesQuery, GetCampusesQuery>();
         services.AddScoped<IGetBuildingsQuery, GetBuildingsQuery>();
         services.AddScoped<IGetFloorsQuery, GetFloorsQuery>();
 
         services.AddScoped<IUpdateVisitDeleteStatusCommand, UpdateVisitDeleteStatusCommand>();
+
+        services.AddScoped<IAddVisitCommand, AddVisitCommand>();
 
     }
 }
